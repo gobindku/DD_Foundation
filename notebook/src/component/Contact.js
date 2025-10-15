@@ -1,7 +1,8 @@
+// ...existing code...
 import React, { useState } from 'react';
 
 const Contact = () => {
-  const [form, setForm] = useState({ name: '', email: '',phone:'', massage: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
 
@@ -12,8 +13,9 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    const backend = process.env.REACT_APP_BACKEND_API || 'http://localhost:5000';
     try {
-      const response = await fetch('http://localhost:5000/api/form/contact', {
+      const response = await fetch(`${backend}/api/form/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
@@ -45,11 +47,11 @@ const Contact = () => {
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label>Phone:</label>
-            <input type="phone" name="phone" value={form.phone} onChange={handleChange} required style={{ width: '100%', padding: '8px' }} />
+            <input type="tel" name="phone" value={form.phone} onChange={handleChange} required style={{ width: '100%', padding: '8px' }} />
           </div>
           <div style={{ marginBottom: '15px' }}>
             <label>Message:</label>
-            <textarea name="massage" value={form.massage} onChange={handleChange} required style={{ width: '100%', padding: '8px' }} />
+            <textarea name="message" value={form.message} onChange={handleChange} required style={{ width: '100%', padding: '8px' }} />
           </div>
           <button type="submit" style={{ width: '100%', padding: '10px', background: '#0070f3', color: '#fff', border: 'none', borderRadius: '5px' }}>Send</button>
           {error && <div style={{ color: 'red', marginTop: '10px' }}>{error}</div>}

@@ -1,24 +1,24 @@
-const {Schema,model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const contactSchema = new Schema({
-
     name: {
         type: String,
-        required: true
+        required: true,
     },
     email: {
         type: String,
-        required: true
+        required: true,
     },
     phone: {
-        type: Number,
-        required: true
-    },
-    massage:{
         type: String,
-        required: true
+        required: true,
+    },
+    message: {
+        type: String,
+        required: true,
+    },
+});
 
-    }
-})
-const Contact = new model('contact', contactSchema);
+// Model name should be singular and capitalized by convention
+const Contact = model('Contact', contactSchema);
 module.exports = Contact;
